@@ -11,7 +11,14 @@
 # c --> $s2
 # d --> $s3
 main:    
+    lw $s0, 5
+    lw $s1, 6
+    lw $s2, 7
+    lw $s3, -1
     
+    slti $s0, 10
+    li $s0, 5
+    syscall
 
 exit:
     la   $a0, albl      # puts albl into arg0 (a0 register) for cout
