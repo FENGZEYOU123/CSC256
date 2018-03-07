@@ -15,29 +15,34 @@ main:
     li $s1, 6
     li $s2, 7
     li $s3, -1
-    li $s4, 1
     li $s5, 10
     
-    ble $s0, $s5, Else
-         addi $s0, $s0, $s4
+            ble $s0, $s5, Else
+            addi $s0, $s0, 1
     Else: 
-         sub $s0, $s0, $s4
+            addi $s0, $s0, -1
     ENDIF1 :
     
-    add $s3, $s0, $s2
-    add $s2, $s0, $s3
+            add $s3, $s0, $s2
+            add $s2, $s0, $s3
     
-    ble $s1, $s5, Else
-        addi $s1, $s1, $s4
-        sub $s2, $s2, $s4
+            ble $s1, $s5, Else
+            addi $s1, $s1, 1
+    Next:   addi $s2, $s2, -1
     Else:
-    addi $s2, $s2, $s4
-         sub $s1, $s1, $s4 
+            addi $s2, $s2, $s4
+    Next:   addi $s1, $s1, -1 
+         
     ENDIF2 :
-    
-    add $s0, $s2, $s1
-    add $s1, $s2, $s3
+            add $s0, $s2, $s1
+            add $s1, $s2, $s3
    
+            ble $s1, $s2, if
+            ble $s1, $s0, Else
+    if:     addi $s3, $s1, $s0
+    j Next
+            
+    Else:   
 
 exit:
     la   $a0, albl      # puts albl into arg0 (a0 register) for cout
