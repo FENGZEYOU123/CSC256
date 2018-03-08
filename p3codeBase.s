@@ -26,8 +26,8 @@ Else1 :
          addi   $s0, $s0, -1      # a = a-1
 ENDIF1 :
 
-add      $s3, $s2, $s0,              # d=c+a
-add      $s2, $s3, $s0               # c=d+a
+add      $s3,$s0, $s2               # d=c+a
+add      $s2,$s0, $s3,                # c=d+a
 
 slt      $t1, $s1, $t0       # Set on $s0 less than $t0   b<10
 add      $s1, $s1, 1         # If a<0 is true, then a = a+1
@@ -39,8 +39,8 @@ add    $s2, $s2, 1        # c = c+1
 addi   $s1, $s1, -1       # b = b-1
 ENDIF2 :
 
-add      $s0, $s1, $s2        # a=b+c
-add      $s1, $s3, $s2        # b=d+c
+add      $s0, $s2, $s1        # a=b+c
+add      $s1,  $s2, $s3     # b=d+c
 
 slt      $t1, $s1, $s2        # is (b<c)?
 slt      $t2, $s0, $s1       # is (a<b)?
