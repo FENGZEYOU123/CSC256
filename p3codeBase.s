@@ -43,7 +43,7 @@ add      $s0, $s1, $s2               # a=b+c
 add      $s1, $s3, $s2               # b=d+c
 
 slt      $t1, $s1, $s2               # Set on $s1 less than $t2   b<c
-slt      $t2, $s0, $s1               # Set on $s0 less than $ta   a<b
+sgt      $t2, $s1, $s0               # Set on $s0 less than $ta   b>a
 beq      $t1, 0, ElseIf              # Branch on equal 0, means if false, b>=c, then run ElseIf
 beq      $t2, 0, ElseIf              # Branch on equal 0, means if false, a>=b, then run ElseIf
 add      $s3, $s0, $s1               # If b<c or a<b are true, then d = a+b
