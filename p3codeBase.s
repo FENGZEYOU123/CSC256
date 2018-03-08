@@ -24,7 +24,7 @@ j         ENDIF1             # end of if0
 beq      $t1, 0, Else1       # Branch on equal 0, means if false, a>=10
 Else1 :
    addi   $s0, $s0, -1      # decrement a by 1
-EndIf :
+ENDIF1 :
 
 add   $s3, $s0, $s2       # d=a+c
 add   $s2, $s0, $s3       # c=a+d
