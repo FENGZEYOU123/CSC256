@@ -49,8 +49,8 @@ beq      $t2, 0, ElseIf              # Branch on equal 0, means if false, a>=b, 
 add      $s3, $s0, $s1               # If b<c or a<b are true, then d = a+b
 j         ENDIF3                     # Jump to End funtion 
 ElseIf :
-   slt       $t1, $s2, $s1           # Set on $s2 less than $t1   c<b
-   slt       $t2, $s2, $s0           # Set on $s2 less than $t0   c>a
+   sgt       $t1, $s1, $s2           # Set on $s2 less than $t1   b>c
+   sgt       $t2, $s0, $s2           # Set on $s2 less than $t0   a>c
    beq   $t1, 1, Else3               # Branch on equal 0, means if the statement is false, c>=b, then run Else3
    beq   $t2, 1, Else3               # Branch on equal 0, means if the statement is false, c>=a, then run Else3
    j         ENDIF3                  # Jump to End funtion if "ElseIf" statement is False
