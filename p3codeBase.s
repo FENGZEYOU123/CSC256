@@ -19,13 +19,12 @@ li       $s3, -1        # load value -1 to d
 li       $t0, 10        # load value 10 to $t0 for next compare function
 
 slt      $t1, $s0, $t0       # Set on $s0 less than $t0   a<10
-
-add      $s0, $s0, 1         # add a +1
-beq      $t1, 0, ELSE1       # branch on equal 0, means if false, a>=10
-j         ENDIF1                # end of if0
-ELSE1 :
+add      $s0, $s0, 1         # If a<0 is true, then a= a +1
+j         ENDIF1             # end of if0
+beq      $t1, 0, Else1       # Branch on equal 0, means if false, a>=10
+Else1 :
    addi   $s0, $s0, -1      # decrement a by 1
-ENDIF1 :
+EndIf :
 
 add   $s3, $s0, $s2       # d=a+c
 add   $s2, $s0, $s3       # c=a+d
