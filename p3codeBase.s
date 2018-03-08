@@ -39,11 +39,12 @@ main:
    
             ble $s1, $s2, if
             ble $s1, $s0, Else
-    if:     addi $s3, $s1, $s0
-    j Next
-            
-    Else:   
-
+    if:     add $s3, $s1, $s0
+    j Else
+            ble $s2, $s1 
+            ble $s0, $s2
+    Next:
+            add $s3, $s1, $s2
 exit:
     la   $a0, albl      # puts albl into arg0 (a0 register) for cout
     addi $v0, $0, 4     # puts 4 in v0 which denotes we are printing a string
