@@ -56,7 +56,7 @@ ElseIf :
    j         exit                  # Jump to End funtion if "ElseIf" statement is False
 exit:   
    add       $s3, $s1, $s2           # d=b+c
-ENDIF3 :
+exit :
 
 exit:
     la   $a0, albl      # puts albl into arg0 (a0 register) for cout
