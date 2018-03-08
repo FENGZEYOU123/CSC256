@@ -12,35 +12,35 @@
 # d --> $s3
 
 main:    
-li       $s0, 5         # load value 5 to a
-li       $s1, 6         # load value 6 to b
-li       $s2, 7         # load value 7 to c
-li       $s3, -1        # load value -1 to d
-li       $t0, 10        # load value 10 to $t0 for next compare function
+li       $s0, 5              # load value 5 to a
+li       $s1, 6              # load value 6 to b
+li       $s2, 7              # load value 7 to c
+li       $s3, -1             # load value -1 to d
+li       $t0, 10             # load value 10 to $t0 for next compare function
 
 slt      $t1, $s0, $t0       # Set on $s0 less than $t0   a<10
-add      $s0, $s0, 1         # If a<0 is true, then a= a +1
-j         ENDIF1             # end of if0
+add      $s0, $s0, 1         # If a<0 is true, then a = a +1
+j        ENDIF1              # End if function
 beq      $t1, 0, Else1       # Branch on equal 0, means if false, a>=10
 Else1 :
-   addi   $s0, $s0, -1      # decrement a by 1
+         addi   $s0, $s0, -1      # a = a-1
 ENDIF1 :
 
-add   $s3, $s0, $s2       # d=a+c
-add   $s2, $s0, $s3       # c=a+d
+add      $s3, $s2, $s0,              # d=c+a
+add      $s2, $s3, $s0               # c=d+a
 
-slt      $t1, $s1, $t0       # is b<10?
-beq   $t1, 0, ELSE2       # if no, then go to else part
-add   $s1, $s1, 1          # if yes, then increment b by 1
-addi   $s2, $s2, -1       # and decrement, c by 1
-j   ENDIF2                    # end of if
-ELSE2 :
-   addi   $s1, $s1, -1       # decrement b by 1
-   add   $s2, $s2, 1       # and increment, c by 1
+slt      $t1, $s1, $t0       # Set on $s0 less than $t0   b<10
+add      $s1, $s1, 1         # If a<0 is true, then a = a+1
+beq      $t1, 0, Else2       # if no, then go to else part
+j        ENDIF2              # End if function
+addi     $s2, $s2, -1        # Branch on equal 0, means if false, b>=10
+Else2 :
+add    $s2, $s2, 1        # c = c+1
+addi   $s1, $s1, -1       # b = b-1
 ENDIF2 :
 
-add   $s0, $s2, $s1       # a=c+b
-add   $s1, $s2, $s3       # b=c+d
+add      $s0, $s1, $s2        # a=b+c
+add      $s1, $s3, $s2        # b=d+c
 
 slt      $t1, $s1, $s2        # is (b<c)?
 slt      $t2, $s0, $s1       # is (a<b)?
