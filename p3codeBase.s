@@ -11,40 +11,52 @@
 # c --> $s2
 # d --> $s3
 main:    
-    li $s0, 5 
-    li $s1, 6
-    li $s2, 7
-    li $s3, -1
-    li $s5, 10
-    
-            ble $s0, $s5, Else
-            addi $s0, $s0, 1
-    Else: 
-            addi $s0, $s0, -1
-    ENDIF1 :
-    
-            add $s3, $s0, $s2
-            add $s2, $s0, $s3
-    
-            ble $s1, $s5, Else
-            addi $s1, $s1, 1
-    Next:   addi $s2, $s2, -1
-    Else:
-            addi $s2, $s2, $s4
-    Next:   addi $s1, $s1, -1 
-         
-    ENDIF2 :
-            add $s0, $s2, $s1
-            add $s1, $s2, $s3
-   
-            ble $s1, $s2, if
-            ble $s1, $s0, Else
-    if:     add $s3, $s1, $s0
-    j Else
-            ble $s2, $s1 
-            ble $s0, $s2
-    Next:
-            add $s3, $s1, $s2
+li   $s0, 5           # load value 5, into $s0 [i.e, a]
+li   $s1, 6
+li   $s2, 7
+li   $s3, -1
+li   $t0, 10
+
+slt      $t1, $s0, $t0       # is a<10?
+beq   $t1, 0, ELSE1       # if no, then go to else part
+add   $s0, $s0, 1           # if yes, then increment a by 1
+j         ENDIF1                # end of if
+ELSE1 :
+   addi   $s0, $s0, -1      # decrement a by 1
+ENDIF1 :
+
+add   $s3, $s0, $s2       # d=a+c
+add   $s2, $s0, $s3       # c=a+d
+
+slt      $t1, $s1, $t0       # is b<10?
+beq   $t1, 0, ELSE2       # if no, then go to else part
+add   $s1, $s1, 1          # if yes, then increment b by 1
+addi   $s2, $s2, -1       # and decrement, c by 1
+j   ENDIF2                    # end of if
+ELSE2 :
+   addi   $s1, $s1, -1       # decrement b by 1
+   add   $s2, $s2, 1       # and increment, c by 1
+ENDIF2 :
+
+add   $s0, $s2, $s1       # a=c+b
+add   $s1, $s2, $s3       # b=c+d
+
+slt      $t1, $s1, $s2        # is (b<c)?
+slt      $t2, $s0, $s1       # is (a<b)?
+beq   $t1, 0, ELSEIF       # if false, then go to ELSEIF
+beq   $t2, 0, ELSEIF       # if false, then go to ELSEIF
+add   $s3, $s0, $s1       # if true, d=a+b
+j         DONE                   # DONE
+ELSEIF :
+   slt       $t1, $s2, $s1       # is (c<b)?
+   slt       $t2, $s2, $s0       # is (c>a)?
+   beq   $t1, 1, LABEL       # if true, goto LABEL
+   beq   $t2, 1, LABEL       # if true, goto LABEL
+   j         DONE           # if false, then DONE
+LABEL:
+   add       $s3, $s1, $s2     # d=b+c
+DONE :
+
 exit:
     la   $a0, albl      # puts albl into arg0 (a0 register) for cout
     addi $v0, $0, 4     # puts 4 in v0 which denotes we are printing a string
