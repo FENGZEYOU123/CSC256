@@ -19,8 +19,8 @@ li       $s3, -1             # load value -1 to d
 li       $t0, 10             # load value 10 to $t0 for next compare function
 
 slt      $t1, $s0, $t0       # Set on $s0 less than $t0   a<10
-add      $s0, $s0, 1         # If a<10 is true, then a = a +1
 beq      $t1, 0, Else1       # Branch on equal 0, means if the statement is false, a>=10, then run Else2
+add      $s0, $s0, 1         # If a<10 is true, then a = a +1
 j        ENDIF1              # Jump to End funtion
 Else1 :
          addi   $s0, $s0, -1         # a = a-1
