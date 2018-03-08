@@ -12,11 +12,11 @@
 # d --> $s3
 
 main:    
-li       $s0, 5              # load value 5 to a
-li       $s1, 6              # load value 6 to b
-li       $s2, 7              # load value 7 to c
-li       $s3, -1             # load value -1 to d
-li       $t0, 10             # load value 10 to $t0 for next compare function
+addi       $s0, 5              # load value 5 to a
+addi       $s1, 6              # load value 6 to b
+addi       $s2, 7              # load value 7 to c
+addi       $s3, -1             # load value -1 to d
+addi       $t0, 10             # load value 10 to $t0 for next compare function
 
 slt      $t1, $s0, $t0       # Set on $s0 less than $t0   a<10
 beq      $t1, 0, Else1       # Branch on equal 0, means if the statement is false, a>=10, then run Else2
