@@ -17,9 +17,8 @@ lw   $s2, 7         # load value 7 to c
 lw   $s3, -1        # load value -1 to d
 lw   $t0, 10        # load value 10 to $t0 for next compare function
 
-slt      $t1, $s0, $t0       # is a<10?
-beq   $t1, 0, ELSE1       # if no, then go to else part
-add   $s0, $s0, 1           # if yes, then increment a by 1
+ble   $t1, $s0, $t0,ELSE1       # set on less than if a<10 ?
+    add   $s0, $s0, 1            # if yes, then increment a by 1
 j         ENDIF1                # end of if
 ELSE1 :
    addi   $s0, $s0, -1      # decrement a by 1
