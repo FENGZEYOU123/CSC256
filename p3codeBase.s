@@ -1,4 +1,5 @@
-    .data
+# Some Code from teammates and website   
+   .data
         endl:    .asciiz  "\n"   # used for cout << endl;
         albl:    .asciiz  "Value of a: " # label for a
         blbl:    .asciiz  "Value of b: " # label for b
@@ -19,46 +20,44 @@ li       $s3, -1             # load value -1 to d
 li       $t0, 10             # load value 10 to $t0 for next compare function
 
 slt      $t1, $s0, $t0       # Set on $s0 less than $t0   a<10
-add      $s0, $s0, 1         # If a<0 is true, then a = a +1
-beq      $t1, 0, Else1       # Branch on equal 0, means if false, a>=10
-j        ENDIF1              # End if function
-
+add      $s0, $s0, 1         # If a<10 is true, then a = a +1
+beq      $t1, 0, Else1       # Branch on equal 0, means if the statement is false, a>=10, then run Else2
+j        ENDIF1              # Jump to End funtion if statement is true
 Else1 :
          addi   $s0, $s0, -1      # a = a-1
-ENDIF1 :
+ENDIF1 :                    # End if function
 
-add      $s3,$s0, $s2               # d=c+a
-add      $s2,$s0, $s3,                # c=d+a
+add      $s3,$s2, $s0                # d = c+a
+add      $s2,$s3, $s0                # c = d+a
 
-slt      $t1, $s1, $t0       # Set on $s0 less than $t0   b<10
-add      $s1, $s1, 1         # If a<0 is true, then a = a+1
-beq      $t1, 0, Else2       # if no, then go to else part
-addi     $s2, $s2, -1        # Branch on equal 0, means if false, b>=10
-j        ENDIF2              # End if function
-
+slt      $t1, $s1, $t0       # Set on $s1 less than $t0   b<10
+add      $s1, $s1, 1         # If b<10 is true, then a = a+1
+addi     $s2, $s2, -1        # If b<10 is true, then c = c-1
+beq      $t1, 0, Else2       # Branch on equal 0, means if the statement is false, b>=10, then run Else2
+j        ENDIF2              # Jump to End funtion if statement is true
 Else2 :
-add    $s2, $s2, 1        # c = c+1
-addi   $s1, $s1, -1       # b = b-1
-ENDIF2 :
+         add    $s2, $s2,  1        # c = c+1
+         addi   $s1, $s1, -1        # b = b-1
+ENDIF2 :                        # End if function
 
-add      $s0, $s2, $s1        # a=b+c
-add      $s1,  $s2, $s3     # b=d+c
+add      $s0, $s1, $s2         # a=b+c
+add      $s1, $s3, $s2         # b=d+c
 
-slt      $t1, $s1, $s2        # is (b<c)?
-slt      $t2, $s0, $s1       # is (a<b)?
-beq   $t1, 0, ELSEIF       # if false, then go to ELSEIF
-beq   $t2, 0, ELSEIF       # if false, then go to ELSEIF
-add   $s3, $s0, $s1       # if true, d=a+b
-j         DONE                   # DONE
-ELSEIF :
-   slt       $t1, $s2, $s1       # is (c<b)?
-   slt       $t2, $s2, $s0       # is (c>a)?
-   beq   $t1, 1, LABEL       # if true, goto LABEL
-   beq   $t2, 1, LABEL       # if true, goto LABEL
-   j         DONE           # if false, then DONE
-LABEL:
+slt      $t1, $s1, $s2        # Set on $s1 less than $t2   b<c
+slt      $t2, $s0, $s1        # Set on $s0 less than $ta   a<b
+beq      $t1, 0, ElseIf       # Branch on equal 0, means if false, b>=10, then run ElseIf
+beq      $t2, 0, ElseIf       # Branch on equal 0, means if false, b>=10, then run ElseIf
+add      $s3, $s0, $s1       # If b<c or a<b are true, then d = a+b
+j         ENDIF3                   # Jump to End funtion if statement is true
+ElseIf :
+   slt       $t1, $s2, $s1       # Set on $s2 less than $t1   c<b
+   slt       $t2, $s2, $s0       # Set on $s2 less than $t0   c>a
+   beq   $t1, 1, Else3       # Branch on equal 0, means if the statement is false, b>=10, then run Else3
+   beq   $t2, 1, Else3       # if true, goto LABEL
+   j         ENDIF3           # if false, then DONE
+Else3:
    add       $s3, $s1, $s2     # d=b+c
-DONE :
+ENDIF3 :
 
 exit:
     la   $a0, albl      # puts albl into arg0 (a0 register) for cout
