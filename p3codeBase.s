@@ -10,16 +10,18 @@
 # b --> $s1
 # c --> $s2
 # d --> $s3
-main:    
-lw   $s0, 5         # load value 5 to a
-lw   $s1, 6         # load value 6 to b
-lw   $s2, 7         # load value 7 to c
-lw   $s3, -1        # load value -1 to d
-lw   $t0, 10        # load value 10 to $t0 for next compare function
 
-ble   $t1, $s0, $t0,ELSE1       # set on less than if a<10 ?
-    add   $s0, $s0, 1            # if yes, then increment a by 1
-j         ENDIF1                # end of if
+main:    
+lw       $s0, 5         # load value 5 to a
+lw       $s1, 6         # load value 6 to b
+lw       $s2, 7         # load value 7 to c
+lw       $s3, -1        # load value -1 to d
+lw       $t0, 10        # load value 10 to $t0 for next compare function
+
+slt      $t1, $s0, $t0       # Set on $s0 less than $t0   a<10
+add      $s0, $s0, 1         # add a +1
+beq      $t1, 0, ELSE1       # branch on equal 0, means if false, a>=10
+j         ENDIF1                # end of if0
 ELSE1 :
    addi   $s0, $s0, -1      # decrement a by 1
 ENDIF1 :
