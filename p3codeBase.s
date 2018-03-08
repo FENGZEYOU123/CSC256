@@ -30,9 +30,9 @@ add      $s3,$s2, $s0                # d = c+a
 add      $s2,$s3, $s0                # c = d+a
 
 slt      $t1, $s1, $t0               # Set on $s1 less than $t0   b<10
+beq      $t1, 0, Else2               # Branch on equal 0, means if the statement is false, b>=10, then run Else2
 add      $s1, $s1, 1                 # If b<10 is true, then a = a+1
 addi     $s2, $s2, -1                # If b<10 is true, then c = c-1
-beq      $t1, 0, Else2               # Branch on equal 0, means if the statement is false, b>=10, then run Else2
 j        ENDIF2                      # Jump to End funtion
 Else2 :
          add    $s2, $s2,  1         # c = c+1
