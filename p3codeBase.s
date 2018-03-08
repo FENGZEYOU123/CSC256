@@ -20,8 +20,9 @@ li       $t0, 10             # load value 10 to $t0 for next compare function
 
 slt      $t1, $s0, $t0       # Set on $s0 less than $t0   a<10
 add      $s0, $s0, 1         # If a<0 is true, then a = a +1
-j        ENDIF1              # End if function
 beq      $t1, 0, Else1       # Branch on equal 0, means if false, a>=10
+j        ENDIF1              # End if function
+
 Else1 :
          addi   $s0, $s0, -1      # a = a-1
 ENDIF1 :
@@ -32,8 +33,9 @@ add      $s2,$s0, $s3,                # c=d+a
 slt      $t1, $s1, $t0       # Set on $s0 less than $t0   b<10
 add      $s1, $s1, 1         # If a<0 is true, then a = a+1
 beq      $t1, 0, Else2       # if no, then go to else part
-j        ENDIF2              # End if function
 addi     $s2, $s2, -1        # Branch on equal 0, means if false, b>=10
+j        ENDIF2              # End if function
+
 Else2 :
 add    $s2, $s2, 1        # c = c+1
 addi   $s1, $s1, -1       # b = b-1
