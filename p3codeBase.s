@@ -52,8 +52,8 @@ bgt      $s1, $s2,Lable7
 blt      $s2, $s0,Lable8
 Lable5: 
 add      $s3, $s0, $s1               # If b<c or a<b are true, then d = a+b
-Lable6: add   
-         $s3, $s0, $s1               # If b<c or a<b are true, then d = a+b
+Lable6:    
+add      $s3, $s0, $s1               # If b<c or a<b are true, then d = a+b
 j        End3                       # Jump to End funtion 
 Lable7:
          add       $s3, $s1, $s2           # d=b+c
