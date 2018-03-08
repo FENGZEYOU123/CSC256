@@ -11,11 +11,11 @@
 # c --> $s2
 # d --> $s3
 main:    
-lw   $s0, 5           # load value 5, into $s0 [i.e, a]
-lw   $s1, 6
-lw   $s2, 7
-lw   $s3, -1
-lw   $t0, 10
+lw   $s0, 5         # load value 5 to a
+lw   $s1, 6         # load value 6 to b
+lw   $s2, 7         # load value 7 to c
+lw   $s3, -1        # load value -1 to d
+lw   $t0, 10        # load value 10 to $t0 for next compare function
 
 slt      $t1, $s0, $t0       # is a<10?
 beq   $t1, 0, ELSE1       # if no, then go to else part
