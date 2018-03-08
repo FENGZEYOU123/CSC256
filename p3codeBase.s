@@ -19,8 +19,8 @@ lw       $s3, -1        # load value -1 to d
 lw       $t0, 10        # load value 10 to $t0 for next compare function
 
 slt      $t1, $s0, $t0       # Set on $s0 less than $t0   a<10
-add      $s0, $s0, 1         # add a +1
 beq      $t1, 0, ELSE1       # branch on equal 0, means if false, a>=10
+add      $s0, $s0, 1         # add a +1
 j         ENDIF1                # end of if0
 ELSE1 :
    addi   $s0, $s0, -1      # decrement a by 1
